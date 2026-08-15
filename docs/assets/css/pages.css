@@ -35,3 +35,30 @@ input[type="file"] { margin: 8px 0; }
 /* ===== Proverbes ===== */
 .prov-jour { border: 2px solid #ff7e00; }
 button[disabled] { opacity: .5; cursor: not-allowed; }
+
+/* ===== Dashboard "hub" ===== */
+.hub { display: grid; grid-template-columns: 1fr 300px; gap: 20px; max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+@media (max-width: 900px) { .hub { grid-template-columns: 1fr; } }
+.hub-greet { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 10px 0 16px; font-size: 1.05rem; }
+.avatar.big { width: 44px; height: 44px; font-size: 1.1rem; }
+.hub-search { background: #fff; border-radius: 10px; box-shadow: 0 1px 6px rgba(0,0,0,.12); padding: 10px 14px; }
+.hub-search input { width: 100%; border: 0; font-size: 1rem; outline: none; background: transparent; }
+.hub-results a { display: block; padding: 6px 4px; color: #1a5fb4; text-decoration: none; border-top: 1px solid #eee; }
+.hub-quick { display: flex; gap: 14px; flex-wrap: wrap; border-top: 1px solid #eee; margin-top: 8px; padding-top: 8px; }
+.hub-quick a { color: #1a5fb4; text-decoration: none; font-size: .9rem; }
+.hub-h { margin: 18px 0 8px; font-size: .95rem; }
+.task-banner { background: #fff; border-radius: 8px; padding: 10px 14px; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+.task-banner a { color: #1a5fb4; }
+.hub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+@media (max-width: 700px) { .hub-grid { grid-template-columns: 1fr; } }
+.hub-card { background: #fff; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,.08); overflow: hidden; }
+.hub-card header { display: flex; justify-content: space-between; align-items: center; background: #f2f2f2; padding: 10px 14px; }
+.hub-card header small { display: block; color: #666; font-size: .75rem; }
+.hub-card header b { font-size: .95rem; }
+.hub-ico { font-size: 1.2rem; opacity: .7; }
+.hub-links { padding: 12px 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.hub-links a, .linklike { color: #1a5fb4; text-decoration: none; font-size: .9rem; background: none; border: 0; padding: 0; text-align: left; cursor: pointer; }
+.hub-links .muted, .muted { color: #999; font-size: .85rem; }
+.hub-links span { font-size: .9rem; }
+.hub-side section { margin-bottom: 18px; }
+.hub-side p { background: #fff; border-radius: 8px; padding: 10px 12px; box-shadow: 0 1px 4px rgba(0,0,0,.08); font-size: .9rem; margin: 0 0 6px; }
