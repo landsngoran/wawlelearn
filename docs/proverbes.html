@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data:; connect-src 'self' https://uhbbxoibysemjmsmshgs.supabase.co; base-uri 'self'; form-action 'self'">
+<title>Proverbes — WawléLearn</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="brand" href="index.html">WawléLearn 🇨</a>
+  <div class="nav-links">
+    <a href="index.html">🏠 Accueil</a>
+    <a href="cours.html">📚 Cours</a>
+    <a href="tarifs.html">💰 Tarifs</a>
+    <a href="tableau-de-bord.html">📊 Tableau de bord</a>
+  </div>
+  <div class="nav-auth">
+    <span id="nav-guest">
+      <a class="btn ghost" href="connexion.html">Connexion</a>
+      <a class="btn" href="inscription.html">S'inscrire</a>
+    </span>
+    <span id="nav-user" hidden>
+      <span id="nav-username"></span>
+      <button id="nav-logout" class="btn ghost" type="button">Déconnexion</button>
+    </span>
+  </div>
+</nav>
+
+<main class="lecon-box" id="prov"></main>
+
+<footer>WawléLearn · Plateforme d'apprentissage du Baoulé · Côte d'Ivoire 🇨🇮</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/proverbes.js"></script>
+</body>
+</html>
