@@ -34,3 +34,4 @@ input[type="file"] { margin: 8px 0; }
 .admin-dot:hover { opacity: 1; }
 /* ===== Proverbes ===== */
 .prov-jour { border: 2px solid #ff7e00; }
+button[disabled] { opacity: .5; cursor: not-allowed; }
