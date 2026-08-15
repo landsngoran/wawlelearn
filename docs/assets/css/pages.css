@@ -1,0 +1,18 @@
+/* ===== Onglets niveaux ===== */
+.tabs { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 20px 0; }
+.tabs button { padding: 10px 16px; border-radius: 999px; border: 2px solid #ff7e00; background: #fff; color: #ff7e00; font-weight: 700; cursor: pointer; }
+.tabs button.actif { background: #ff7e00; color: #fff; }
+.titre-niveau { margin: 26px 0 12px; text-align: center; }
+.lecon-card { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: .75rem; font-weight: 700; background: #fff3e6; color: #ff7e00; }
+.badge.lock { background: #eee; color: #666; }
+.mots { color: #555; font-size: .9rem; margin: 0; }
+.bandeau { max-width: 960px; margin: 12px auto 0; padding: 12px 16px; background: #fff3e6; border: 1px solid #ffd8ae; border-radius: 10px; text-align: center; }
+
+/* ===== Tarifs ===== */
+.prix { font-size: 1.6rem; font-weight: 800; color: #ff7e00; margin: 6px 0; }
+.prix small { font-size: .85rem; color: #666; font-weight: 600; }
+.liste { list-style: none; padding: 0; margin: 12px 0; }
+.liste li { padding: 6px 0; border-bottom: 1px dashed #eee; font-size: .92rem; }
+.liste li.non { color: #aaa; text-decoration: line-through; }
+.paiements { text-align: center; color: #666; font-size: .9rem; }
