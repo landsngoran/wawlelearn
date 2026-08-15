@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data:; connect-src 'self' https://uhbbxoibysemjmsmshgs.supabase.co; base-uri 'self'; form-action 'self'">
+<title>Tableau de bord — WawléLearn</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="container" id="dashboard">
+  <h1>WawléLearn 🇨🇮</h1>
+  <h2>Tableau de bord</h2>
+  <p>
+    <b id="user-name">…</b><br>
+    <span id="user-email">…</span><br>
+    Plan : <span id="user-plan">free</span>
+  </p>
+  <div class="stats">
+    <div><b id="stat-points">0</b>Points</div>
+    <div><b id="stat-lecons">0</b>Leçons</div>
+    <div><b id="stat-serie">0</b>Jours de série</div>
+  </div>
+  <button id="btn-logout" type="button">Se déconnecter</button>
+  <p><a href="index.html">← Accueil</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/auth.js"></script>
+</body>
+</html>
