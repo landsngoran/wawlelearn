@@ -1,5 +1,5 @@
-// WawléLearn — Page Leçon (affichage + quiz + progression)
-// Rendu 100% textContent/createElement (anti-XSS).
+// WawléLearn — Page Leçon
+// Priorité au vocabulaire en base (vocabulaire), repli sur le JSON provisoire.
 
 function el(tag, cls, txt) {
   const n = document.createElement(tag);
@@ -31,7 +31,6 @@ function el(tag, cls, txt) {
   });
   if (!lecon) { root.appendChild(el("p", "msg", "Leçon introuvable.")); return; }
 
-  // Session + plan
   let session = null, plan = "free";
   try {
     const r = await sb.auth.getSession();
@@ -43,7 +42,6 @@ function el(tag, cls, txt) {
   } catch (e) { /* reste free */ }
   const premium = (plan === "premium" || plan === "institution");
 
-  // Verrou Premium
   if (niveau.premium && !premium) {
     root.appendChild(el("h2", null, "🔐 Contenu Premium"));
     root.appendChild(el("p", null, "Cette leçon est réservée aux abonnés Premium. Débloquez tous les modules A2, B1 et B2 pour 2 500 CFA/mois."));
@@ -58,17 +56,27 @@ function el(tag, cls, txt) {
     return;
   }
 
-  // En-tête
   root.appendChild(el("span", "badge", niveau.code + " — " + niveau.nom));
   root.appendChild(el("h2", null, lecon.titre));
-  if (lecon.note) root.appendChild(el("p", "mots", lecon.note));
 
-  // Mots + quiz
-  if (!lecon.mots || !lecon.mots.length) {
-    root.appendChild(el("p", "mots", "[contenu à fournir]"));
+  // Vocabulaire : base d'abord, JSON en repli
+  let mots = [];
+  try {
+    const { data: rows } = await sb
+      .from("vocabulaire")
+      .select("baoule, francais")
+      .eq("lecon_id", lecon.id)
+      .order("id")
+      .limit(300);
+    if (rows && rows.length) mots = rows.map((r) => ({ b: r.baoule, f: r.francais }));
+  } catch (e) { /* repli JSON */ }
+  if (!mots.length && lecon.mots && lecon.mots.length) mots = lecon.mots;
+
+  if (!mots.length) {
+    root.appendChild(el("p", "mots", "[contenu à fournir — importe-le via la page Admin]"));
   } else {
     const ul = el("ul", "liste");
-    lecon.mots.forEach((m) => {
+    mots.forEach((m) => {
       const li = el("li");
       li.appendChild(el("b", null, m.b));
       li.appendChild(document.createTextNode(" = " + m.f));
@@ -78,11 +86,11 @@ function el(tag, cls, txt) {
 
     root.appendChild(el("h3", null, "✍️ Petit quiz"));
     const quiz = el("div", "quiz");
-    const target = lecon.mots[Math.floor(Math.random() * lecon.mots.length)];
-    quiz.appendChild(el("p", null, "Comment dit-on « " + target.f.replace(/\s*\(.*\)/, "").trim() + " » en baoulé ?"));
+    const target = mots[Math.floor(Math.random() * mots.length)];
+    quiz.appendChild(el("p", null, "Comment dit-on « " + String(target.f).replace(/\s*\(.*\)/, "").trim() + " » en baoulé ?"));
     const choices = [target.b];
-    while (choices.length < Math.min(4, lecon.mots.length)) {
-      const cand = lecon.mots[Math.floor(Math.random() * lecon.mots.length)].b;
+    while (choices.length < Math.min(4, mots.length)) {
+      const cand = mots[Math.floor(Math.random() * mots.length)].b;
       if (!choices.includes(cand)) choices.push(cand);
     }
     choices.sort(() => Math.random() - 0.5);
@@ -99,14 +107,13 @@ function el(tag, cls, txt) {
     root.appendChild(quiz);
   }
 
-  // Marquer comme terminée
   const done = el("button", "btn", "✅ Marquer comme terminée (+10 pts)");
   done.addEventListener("click", async () => {
     if (!session) { window.location.href = "connexion.html"; return; }
     const { error } = await sb
       .from("lesson_progress")
       .upsert({ user_id: session.user.id, lesson_id: lecon.id }, { onConflict: "user_id,lesson_id" });
-    if (error) { msgErreur(done); return; }
+    if (error) { done.textContent = "Erreur, réessaie plus tard."; done.disabled = true; return; }
     const { count } = await sb
       .from("lesson_progress")
       .select("*", { count: "exact", head: true })
@@ -120,12 +127,6 @@ function el(tag, cls, txt) {
   });
   root.appendChild(done);
 
-  function msgErreur(btn) {
-    btn.textContent = "Erreur, réessaie plus tard.";
-    btn.disabled = true;
-  }
-
-  // Navigation précédent / suivant
   const nav = el("div", "nav-lecon");
   if (idx > 0) {
     const p = el("a", null, "← Leçon précédente");
