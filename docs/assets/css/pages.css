@@ -62,3 +62,15 @@ button[disabled] { opacity: .5; cursor: not-allowed; }
 .hub-links span { font-size: .9rem; }
 .hub-side section { margin-bottom: 18px; }
 .hub-side p { background: #fff; border-radius: 8px; padding: 10px 12px; box-shadow: 0 1px 4px rgba(0,0,0,.08); font-size: .9rem; margin: 0 0 6px; }
+
+/* ===== Dashboard v2 : barres, badges, footer collé ===== */
+body { min-height: 100vh; display: flex; flex-direction: column; }
+.hub { flex: 1; }
+.bar { height: 8px; background: #e8e8e8; border-radius: 4px; overflow: hidden; }
+.bar i { display: block; height: 100%; background: #ff7e00; width: 0%; }
+.niv-line { display: flex; align-items: center; gap: 8px; margin-top: 8px; font-size: .85rem; }
+.niv-line .bar { flex: 1; }
+.hub-badges { display: flex; gap: 10px; flex-wrap: wrap; }
+.badge-item { background: #fff; border-radius: 10px; padding: 10px 14px; box-shadow: 0 1px 4px rgba(0,0,0,.08); font-size: 1rem; text-align: center; }
+.badge-item small { display: block; color: #666; font-size: .75rem; }
+.badge-item.locked { opacity: .4; filter: grayscale(1); }
