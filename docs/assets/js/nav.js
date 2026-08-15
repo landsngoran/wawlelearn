@@ -1,4 +1,4 @@
-// Navigation intelligente + lien admin dynamique
+// Navigation intelligente + accès admin discret dans le pied de page
 (async () => {
   const guest = document.getElementById("nav-guest");
   const user = document.getElementById("nav-user");
@@ -21,12 +21,17 @@
         (session.user.user_metadata && session.user.user_metadata.full_name);
       if (nameEl && fullName) nameEl.textContent = fullName; // textContent = anti-XSS
 
+      // Icône admin discrète dans le footer (visible UNIQUEMENT par l'admin)
       if (prof && prof.role === "admin") {
-        const a = document.createElement("a");
-        a.href = "admin.html";
-        a.textContent = "🛠️ Admin";
-        const links = document.querySelector(".nav-links");
-        if (links) links.appendChild(a);
+        const footer = document.querySelector("footer");
+        if (footer && !document.querySelector(".admin-dot")) {
+          const a = document.createElement("a");
+          a.href = "admin.html";
+          a.className = "admin-dot";
+          a.textContent = "⚙️";
+          a.title = "Administration";
+          footer.appendChild(a);
+        }
       }
 
       const logout = document.getElementById("nav-logout");
