@@ -1,0 +1,64 @@
+{
+  "meta": {
+    "note_contenu": "Structure provisoire. Tout mot marqué EXEMPLE À VALIDER doit être confirmé par un enseignant de baoulé avant publication réelle."
+  },
+  "niveaux": [
+    {
+      "code": "A1",
+      "nom": "Débutant",
+      "premium": false,
+      "lecons": [
+        { "id": "a1-01", "titre": "Salutations & politesse", "note": "EXEMPLE À VALIDER PAR UN ENSEIGNANT", "mots": [ { "b": "Mo", "f": "Bonjour / salut (EXEMPLE À VALIDER)" }, { "b": "Akwaba", "f": "Bienvenue (EXEMPLE À VALIDER)" }, { "b": "nzue", "f": "eau (EXEMPLE À VALIDER)" }, { "b": "bian", "f": "homme (EXEMPLE À VALIDER)" }, { "b": "bla", "f": "femme (EXEMPLE À VALIDER)" }, { "b": "ba", "f": "enfant (EXEMPLE À VALIDER)" } ] },
+        { "id": "a1-02", "titre": "Se présenter" },
+        { "id": "a1-03", "titre": "La famille" },
+        { "id": "a1-04", "titre": "Les nombres (1 à 10)" },
+        { "id": "a1-05", "titre": "Au marché" },
+        { "id": "a1-06", "titre": "Nourriture & boissons" },
+        { "id": "a1-07", "titre": "Tons & caractères spéciaux (ɛ, ɔ, ŋ, ɲ)" },
+        { "id": "a1-08", "titre": "Verbes essentiels" },
+        { "id": "a1-09", "titre": "Révision + test A1" }
+      ]
+    },
+    {
+      "code": "A2",
+      "nom": "Élémentaire",
+      "premium": true,
+      "lecons": [
+        { "id": "a2-10", "titre": "Le village & la maison" },
+        { "id": "a2-11", "titre": "Le temps & les jours" },
+        { "id": "a2-12", "titre": "Verbes : présent & passé" },
+        { "id": "a2-13", "titre": "Questions courantes" },
+        { "id": "a2-14", "titre": "Proverbes simples" },
+        { "id": "a2-15", "titre": "Au poste de santé" },
+        { "id": "a2-16", "titre": "Transports & voyage" },
+        { "id": "a2-17", "titre": "Révision + test A2" }
+      ]
+    },
+    {
+      "code": "B1",
+      "nom": "Intermédiaire",
+      "premium": true,
+      "lecons": [
+        { "id": "b1-18", "titre": "Récits au passé" },
+        { "id": "b1-19", "titre": "Expressions idiomatiques" },
+        { "id": "b1-20", "titre": "Conversations longues" },
+        { "id": "b1-21", "titre": "Chansons & poésie" },
+        { "id": "b1-22", "titre": "Donner son opinion" },
+        { "id": "b1-23", "titre": "Révision + test B1" }
+      ]
+    },
+    {
+      "code": "B2",
+      "nom": "Avancé",
+      "premium": true,
+      "lecons": [
+        { "id": "b2-24", "titre": "Langage soutenu & cérémonies" },
+        { "id": "b2-25", "titre": "Littérature orale" },
+        { "id": "b2-26", "titre": "Traduction avancée" },
+        { "id": "b2-27", "titre": "Enseigner le baoulé" },
+        { "id": "b2-28", "titre": "Projet personnel" },
+        { "id": "b2-29", "titre": "Révision + test B2" }
+      ]
+    }
+  ]
+}
