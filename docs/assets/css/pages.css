@@ -32,4 +32,5 @@ input[type="file"] { margin: 8px 0; }
 /* ===== Accès admin discret ===== */
 .admin-dot { opacity: .35; text-decoration: none; margin-left: 8px; font-size: .8rem; }
 .admin-dot:hover { opacity: 1; }
-
+/* ===== Proverbes ===== */
+.prov-jour { border: 2px solid #ff7e00; }
