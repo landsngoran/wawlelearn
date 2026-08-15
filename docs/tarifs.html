@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data:; connect-src 'self' https://uhbbxoibysemjmsmshgs.supabase.co; base-uri 'self'; form-action 'self'">
+<title>Tarifs — WawléLearn</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="brand" href="index.html">WawléLearn 🇨</a>
+  <div class="nav-links">
+    <a href="index.html">🏠 Accueil</a>
+    <a href="cours.html">📚 Cours</a>
+    <a href="tarifs.html">💰 Tarifs</a>
+    <a href="tableau-de-bord.html">📊 Tableau de bord</a>
+  </div>
+  <div class="nav-auth">
+    <span id="nav-guest">
+      <a class="btn ghost" href="connexion.html">Connexion</a>
+      <a class="btn" href="inscription.html">S'inscrire</a>
+    </span>
+    <span id="nav-user" hidden>
+      <span id="nav-username"></span>
+      <button id="nav-logout" class="btn ghost" type="button">Déconnexion</button>
+    </span>
+  </div>
+</nav>
+
+<section class="section">
+  <h2>💰 Nos offres</h2>
+  <p class="sub">Choisissez le plan qui vous convient</p>
+  <div class="grid">
+
+    <div class="card">
+      <span class="emoji">🌱</span>
+      <h3>Gratuit</h3>
+      <p class="prix">0 CFA <small>pour toujours</small></p>
+      <ul class="liste">
+        <li>✅ Module A1 complet (9 leçons)</li>
+        <li>✅ Dictionnaire de base</li>
+        <li class="non">Modules A2, B1, B2</li>
+        <li class="non">Traducteur IA</li>
+        <li class="non">Certificats</li>
+      </ul>
+      <a class="btn" href="inscription.html">S'inscrire gratuitement</a>
+    </div>
+
+    <div class="card">
+      <span class="emoji">⭐</span>
+      <h3>Premium</h3>
+      <p class="prix">2 500 CFA/mois <small>ou 20 000 CFA/an (-33%)</small></p>
+      <ul class="liste">
+        <li>✅ Tous les modules A1→B2 (29 leçons)</li>
+        <li>✅ Traducteur IA (bientôt)</li>
+        <li>✅ Dictionnaire enrichi</li>
+        <li>✅ 1 certificat inclus</li>
+        <li>✅ Support par WhatsApp</li>
+      </ul>
+      <a class="btn" href="inscription.html">S'abonner maintenant</a>
+      <p class="paiements">Paiement Mobile Money via CinetPay : prochaine étape.</p>
+    </div>
+
+    <div class="card">
+      <span class="emoji">🏫</span>
+      <h3>Institution</h3>
+      <p class="prix">15 000 CFA/mois <small>jusqu'à 30 apprenants</small></p>
+      <ul class="liste">
+        <li>✅ Tout le contenu Premium</li>
+        <li>✅ Dashboard administrateur</li>
+        <li>✅ Suivi des apprenants</li>
+        <li>✅ Certificats illimités</li>
+        <li>✅ Formation des formateurs</li>
+      </ul>
+      <a class="btn ghost" href="mailto:landsngoran@gmail.com?subject=D%C3%A9mo%20Wawl%C3%A9Learn%20Institution">Contacter pour démo</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <h2>🎓 Certificats à l'unité</h2>
+  <p class="sub">Même sans abonnement</p>
+  <div class="grid">
+    <div class="card"><h3>Niveau A1</h3><p class="prix">3 000 CFA</p></div>
+    <div class="card"><h3>Niveau A2</h3><p class="prix">4 000 CFA</p></div>
+    <div class="card"><h3>Niveau B1</h3><p class="prix">5 000 CFA</p></div>
+    <div class="card"><h3>Niveau B2</h3><p class="prix">6 000 CFA</p></div>
+  </div>
+  <p class="paiements">🌊 Wave · 🟠 Orange Money · 💛 MTN MoMo · 💳 Visa/Mastercard — paiement 100% sécurisé via CinetPay (prochaine étape).</p>
+</section>
+
+<footer>WawléLearn · Plateforme d'apprentissage du Baoulé · Côte d'Ivoire 🇨🇮</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/nav.js"></script>
+</body>
+</html>
