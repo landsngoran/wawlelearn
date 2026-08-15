@@ -6,26 +6,117 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data:; connect-src 'self' https://uhbbxoibysemjmsmshgs.supabase.co; base-uri 'self'; form-action 'self'">
 <title>Tableau de bord — WawléLearn</title>
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/pages.css">
 </head>
 <body>
-<div class="container" id="dashboard">
-  <h1>WawléLearn 🇨🇮</h1>
-  <h2>Tableau de bord</h2>
-  <p>
-    <b id="user-name">…</b><br>
-    <span id="user-email">…</span><br>
-    Plan : <span id="user-plan">free</span>
-  </p>
-  <div class="stats">
-    <div><b id="stat-points">0</b>Points</div>
-    <div><b id="stat-lecons">0</b>Leçons</div>
-    <div><b id="stat-serie">0</b>Jours de série</div>
+
+<nav class="nav">
+  <a class="brand" href="index.html">WawléLearn 🇨🇮</a>
+  <div class="nav-links">
+    <a href="index.html">🏠 Accueil</a>
+    <a href="cours.html">📚 Cours</a>
+    <a href="tarifs.html">💰 Tarifs</a>
+    <a href="tableau-de-bord.html">📊 Tableau de bord</a>
   </div>
-  <button id="btn-logout" type="button">Se déconnecter</button>
-  <p><a href="index.html">← Accueil</a></p>
-</div>
+  <div class="nav-auth">
+    <span id="nav-guest">
+      <a class="btn ghost" href="connexion.html">Connexion</a>
+      <a class="btn" href="inscription.html">S'inscrire</a>
+    </span>
+    <span id="nav-user" hidden>
+      <span id="nav-username"></span>
+      <button id="nav-logout" class="btn ghost" type="button">Déconnexion</button>
+    </span>
+  </div>
+</nav>
+
+<main class="hub">
+  <div class="hub-main">
+
+    <div class="hub-greet">
+      <span class="avatar big" id="dash-avatar"></span>
+      <span id="dash-bonjour">Bonjour</span> <b id="dash-name">…</b>
+    </div>
+
+    <div class="hub-search">
+      <input id="dash-q" type="search" placeholder="Rechercher une leçon…" maxlength="60" autocomplete="off">
+      <div id="dash-results" class="hub-results"></div>
+      <div class="hub-quick">
+        <a href="cours.html">Mes cours</a>
+        <a href="proverbes.html">Proverbes</a>
+        <a href="tarifs.html">Tarifs</a>
+        <a href="admin.html" id="quick-admin" hidden>🛠️ Admin</a>
+      </div>
+    </div>
+
+    <section>
+      <h3 class="hub-h">✅ Tâches</h3>
+      <div class="task-banner" id="task-next">Chargement…</div>
+    </section>
+
+    <div class="hub-grid">
+      <div class="hub-card">
+        <header><div><small>Mon apprentissage</small><b>Parcours Baoulé</b></div><span class="hub-ico">📚</span></header>
+        <div class="hub-links">
+          <a href="cours.html">Cours A1→B2</a>
+          <a href="cours.html" id="link-next">Reprendre la leçon</a>
+          <a href="proverbes.html">Proverbes baoulé</a>
+          <a href="cours.html">Révisions & tests</a>
+        </div>
+      </div>
+
+      <div class="hub-card">
+        <header><div><small>Personnel</small><b id="card-name">…</b></div><span class="hub-ico">👤</span></header>
+        <div class="hub-links">
+          <span id="stat-line">…</span>
+          <span id="plan-line">Plan : …</span>
+          <a href="tarifs.html" id="link-premium">Passer Premium ⭐</a>
+        </div>
+      </div>
+
+      <div class="hub-card">
+        <header><div><small>Communauté</small><b>Bientôt</b></div><span class="hub-ico">👥</span></header>
+        <div class="hub-links">
+          <span class="muted">Classement de la semaine — à venir</span>
+          <span class="muted">Partage de phrases — à venir</span>
+        </div>
+      </div>
+
+      <div class="hub-card">
+        <header><div><small>Compte et sécurité</small><b>Mes paramètres</b></div><span class="hub-ico">🔒</span></header>
+        <div class="hub-links">
+          <button id="btn-reset-pass" class="linklike" type="button">Changer mon mot de passe</button>
+          <span id="whats-line">WhatsApp : …</span>
+          <button id="btn-logout2" class="linklike" type="button">Se déconnecter</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <aside class="hub-side">
+    <section>
+      <h3 class="hub-h">🕒 Nouveautés</h3>
+      <p>Déblocage progressif des leçons activé.</p>
+      <p>Proverbes baoulé en ligne.</p>
+    </section>
+    <section>
+      <h3 class="hub-h">📜 Proverbe du jour</h3>
+      <p id="side-prov">…</p>
+    </section>
+    <section>
+      <h3 class="hub-h">📅 Évènements à venir</h3>
+      <p class="muted">Aucun évènement pour l'instant.</p>
+    </section>
+  </aside>
+</main>
+
+<footer>WawléLearn · Plateforme d'apprentissage du Baoulé · Côte d'Ivoire 🇨</footer>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="assets/js/supabase-client.js"></script>
-<script src="assets/js/auth.js"></script>
+<script src="assets/js/progress.js"></script>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/dashboard.js"></script>
 </body>
 </html>
