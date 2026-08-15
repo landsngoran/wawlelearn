@@ -1,4 +1,14 @@
-// Navigation intelligente + accès admin discret dans le pied de page
+// Navigation intelligente : lien Proverbes pour tous + admin discret
+(function () {
+  const links = document.querySelector(".nav-links");
+  if (links && !links.querySelector('a[href="proverbes.html"]')) {
+    const p = document.createElement("a");
+    p.href = "proverbes.html";
+    p.textContent = "📜 Proverbes";
+    links.appendChild(p);
+  }
+})();
+
 (async () => {
   const guest = document.getElementById("nav-guest");
   const user = document.getElementById("nav-user");
@@ -19,9 +29,8 @@
       const nameEl = document.getElementById("nav-username");
       const fullName = (prof && prof.full_name) ||
         (session.user.user_metadata && session.user.user_metadata.full_name);
-      if (nameEl && fullName) nameEl.textContent = fullName; // textContent = anti-XSS
+      if (nameEl && fullName) nameEl.textContent = fullName;
 
-      // Icône admin discrète dans le footer (visible UNIQUEMENT par l'admin)
       if (prof && prof.role === "admin") {
         const footer = document.querySelector("footer");
         if (footer && !document.querySelector(".admin-dot")) {
