@@ -1,20 +1,76 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WawléLearn - Apprenez le Baoulé</title>
-    <style>
-        body { font-family: sans-serif; margin: 0; padding: 20px; background: #f4f4f4; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; }
-        h1 { color: #ff7e00; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data:; connect-src 'self' https://uhbbxoibysemjmsmshgs.supabase.co; base-uri 'self'; form-action 'self'">
+<title>WawléLearn — Apprenez le Baoulé en ligne</title>
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>WawléLearn 🇨🇮</h1>
-        <p>Bienvenue sur la plateforme n°1 d'apprentissage du Baoulé.</p>
-        <p><em>Le site est en cours de construction...</em></p>
-    </div>
+
+<nav class="nav">
+  <a class="brand" href="index.html">WawléLearn 🇨🇮</a>
+  <div class="nav-links">
+    <a href="index.html">🏠 Accueil</a>
+    <a href="cours.html">📚 Cours</a>
+    <a href="tarifs.html">💰 Tarifs</a>
+    <a href="tableau-de-bord.html">📊 Tableau de bord</a>
+  </div>
+  <div class="nav-auth">
+    <span id="nav-guest">
+      <a class="btn ghost" href="connexion.html">Connexion</a>
+      <a class="btn" href="inscription.html">S'inscrire</a>
+    </span>
+    <span id="nav-user" hidden>
+      <span id="nav-username"></span>
+      <button id="nav-logout" class="btn ghost" type="button">Déconnexion</button>
+    </span>
+  </div>
+</nav>
+
+<header class="hero">
+  <h1>Maîtrisez le Baoulé Wawlé de Côte d'Ivoire 🇨🇮</h1>
+  <p>Cours structurés A1→B2, exercices interactifs, certificats reconnus. Apprenez la langue kwa de la région Gbêkê avec des professeurs natifs.</p>
+  <div class="cta">
+    <a class="btn" href="inscription.html">Commencer gratuitement</a>
+    <a class="btn ghost" href="tarifs.html">Voir les offres</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><b>1 240</b><span>Étudiants</span></div>
+    <div class="stat"><b>29</b><span>Leçons</span></div>
+    <div class="stat"><b>4</b><span>Niveaux</span></div>
+    <div class="stat"><b>98%</b><span>Satisfaction</span></div>
+  </div>
+</header>
+
+<section class="section">
+  <h2>Pourquoi WawléLearn ?</h2>
+  <p class="sub">Une plateforme conçue pour les Ivoiriens et la diaspora</p>
+  <div class="grid">
+    <div class="card"><span class="emoji">🎯</span><h3>Méthode structurée</h3><p>Progression A1→B2 basée sur le cadre ILA d'Abidjan et les normes wol.jw.org/AO.</p></div>
+    <div class="card"><span class="emoji">🔊</span><h3>Audio & prononciation</h3><p>Tous les mots sont écoutables. Maîtrise les tons et les caractères spéciaux : ɛ, ɔ, ŋ, ɲ.</p></div>
+    <div class="card"><span class="emoji">🏆</span><h3>Certificats officiels</h3><p>Obtiens un certificat de niveau valide pour valoriser tes compétences professionnelles.</p></div>
+    <div class="card"><span class="emoji">📱</span><h3>Mobile & offline</h3><p>Apprends depuis ton téléphone, même sans internet (mode PWA installable, bientôt).</p></div>
+    <div class="card"><span class="emoji">💬</span><h3>Communauté active</h3><p>Rejoins des milliers d'apprenants, partage des proverbes et pratique ensemble.</p></div>
+    <div class="card"><span class="emoji">💰</span><h3>Prix accessible</h3><p>À partir de 2 500 CFA/mois. Paiement Mobile Money (Wave, Orange, MTN).</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Ce que disent nos étudiants</h2>
+  <p class="sub">Yoo ! Ils témoignent de leur progression</p>
+  <div class="grid">
+    <div class="card"><span class="emoji">👩🏾</span><h3>Adjoua Kouamé — Abidjan</h3><p>« En 3 mois, je parle baoulé avec mes grands-parents à Sakassou. Méthode excellente, leçons claires ! » ⭐⭐⭐⭐⭐</p></div>
+    <div class="card"><span class="emoji">👨🏾</span><h3>Koffi Brou — Lyon</h3><p>« Diaspora ivoirienne, je voulais renouer avec mes racines. WawléLearn me l'a permis depuis la France ! » ⭐⭐⭐⭐⭐</p></div>
+    <div class="card"><span class="emoji">🧑🏾‍🏫</span><h3>Yao Assi — Bouaké</h3><p>« Professeur à Bouaké, j'utilise WawléLearn pour former mes collègues. Le module B2 est exceptionnel ! » ⭐⭐⭐⭐⭐</p></div>
+  </div>
+</section>
+
+<footer>WawléLearn · Plateforme d'apprentissage du Baoulé · Côte d'Ivoire 🇨🇮</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/nav.js"></script>
 </body>
 </html>
