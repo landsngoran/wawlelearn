@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data:; connect-src 'self' https://uhbbxoibysemjmsmshgs.supabase.co; base-uri 'self'; form-action 'self'">
+<title>Connexion — WawléLearn</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="container">
+  <h1>WawléLearn 🇨🇮</h1>
+  <h2>Se connecter</h2>
+  <form id="form-connexion">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" required maxlength="120" autocomplete="email">
+
+    <label for="motdepasse">Mot de passe</label>
+    <input id="motdepasse" name="current-password" type="password" required maxlength="72" autocomplete="current-password">
+
+    <button type="submit">Connexion</button>
+    <p id="msg-connexion" class="msg" role="alert"></p>
+  </form>
+  <p>Pas encore de compte ? <a href="inscription.html">S'inscrire gratuitement</a></p>
+  <p><a href="index.html">← Retour à l'accueil</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/auth.js"></script>
+</body>
+</html>
