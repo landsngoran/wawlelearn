@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; img-src 'self' data:; connect-src 'self' https://uhbbxoibysemjmsmshgs.supabase.co; base-uri 'self'; form-action 'self'">
+<title>Inscription — WawléLearn</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<div class="container">
+  <h1>WawléLearn 🇨🇮</h1>
+  <h2>Créer mon compte gratuit</h2>
+  <form id="form-inscription">
+    <label for="nom">Nom complet</label>
+    <input id="nom" name="name" type="text" required maxlength="80" autocomplete="name">
+
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" required maxlength="120" autocomplete="email">
+
+    <label for="whatsapp">Numéro WhatsApp (optionnel)</label>
+    <input id="whatsapp" name="tel" type="tel" maxlength="20" placeholder="+225 07 00 00 00 00" autocomplete="tel">
+
+    <label for="motdepasse">Mot de passe (8 caractères min.)</label>
+    <input id="motdepasse" name="new-password" type="password" required minlength="8" maxlength="72" autocomplete="new-password">
+
+    <label class="cgu"><input id="cgu" type="checkbox" required> J'accepte les CGU</label>
+
+    <button type="submit">Créer mon compte</button>
+    <p id="msg-inscription" class="msg" role="alert"></p>
+  </form>
+  <p>Déjà inscrit ? <a href="connexion.html">Se connecter</a></p>
+  <p><a href="index.html">← Retour à l'accueil</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="assets/js/supabase-client.js"></script>
+<script src="assets/js/auth.js"></script>
+</body>
+</html>
