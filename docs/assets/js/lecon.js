@@ -1,5 +1,4 @@
-// WawléLearn — Page Leçon
-// Priorité au vocabulaire en base (vocabulaire), repli sur le JSON provisoire.
+// WawléLearn — Page Leçon v3 : verrou progressif + vocabulaire base + quiz
 
 function el(tag, cls, txt) {
   const n = document.createElement(tag);
@@ -23,43 +22,60 @@ function el(tag, cls, txt) {
   try { data = await (await fetch("data/lessons.json")).json(); }
   catch (e) { root.appendChild(el("p", "msg", "Impossible de charger la leçon.")); return; }
 
-  let niveau = null, lecon = null, idx = -1;
-  data.niveaux.forEach((niv) => {
+  let niveau = null, lecon = null, idx = -1, ni = -1;
+  data.niveaux.forEach((niv, a) => {
     niv.lecons.forEach((lec, i) => {
-      if (lec.id === id) { niveau = niv; lecon = lec; idx = i; }
+      if (lec.id === id) { niveau = niv; lecon = lec; idx = i; ni = a; }
     });
   });
   if (!lecon) { root.appendChild(el("p", "msg", "Leçon introuvable.")); return; }
 
-  let session = null, plan = "free";
-  try {
-    const r = await sb.auth.getSession();
-    session = r.data.session;
-    if (session) {
-      const p = await sb.from("profiles").select("plan").eq("id", session.user.id).single();
-      if (p.data && p.data.plan) plan = p.data.plan;
-    }
-  } catch (e) { /* reste free */ }
-  const premium = (plan === "premium" || plan === "institution");
+  const profInfo = await wlGetProfile();
+  const session = profInfo.session;
+  const premium = profInfo.plan === "premium" || profInfo.plan === "institution";
+  const bypass = profInfo.role === "admin" || profInfo.unlockAll;
+  const completed = await wlGetCompleted(session);
+  const unlocked = wlComputeUnlocked(data.niveaux, completed, premium, bypass);
 
-  if (niveau.premium && !premium) {
-    root.appendChild(el("h2", null, "🔐 Contenu Premium"));
-    root.appendChild(el("p", null, "Cette leçon est réservée aux abonnés Premium. Débloquez tous les modules A2, B1 et B2 pour 2 500 CFA/mois."));
-    const a = el("a", "btn", "Voir les offres Premium");
-    a.href = "tarifs.html";
-    root.appendChild(a);
-    if (!session) {
-      const b = el("a", "btn ghost", "Je n'ai pas encore de compte");
-      b.href = "inscription.html";
-      root.appendChild(b);
+  // ----- VERROUS -----
+  if (!unlocked.has(lecon.id)) {
+    if (niveau.premium && !premium && profInfo.role !== "admin") {
+      root.appendChild(el("h2", null, "🔐 Contenu Premium"));
+      root.appendChild(el("p", null, "Cette leçon est réservée aux abonnés Premium. Débloquez tous les modules A2, B1 et B2 pour 2 500 CFA/mois."));
+      const a = el("a", "btn", "Voir les offres Premium");
+      a.href = "tarifs.html";
+      root.appendChild(a);
+      if (!session) {
+        const b = el("a", "btn ghost", "Je n'ai pas encore de compte");
+        b.href = "inscription.html";
+        root.appendChild(b);
+      }
+    } else {
+      root.appendChild(el("h2", null, "🔒 Leçon verrouillée"));
+      let prevTitre = null, prevId = null;
+      if (idx > 0) { prevTitre = niveau.lecons[idx - 1].titre; prevId = niveau.lecons[idx - 1].id; }
+      else if (ni > 0) {
+        const pn = data.niveaux[ni - 1];
+        prevTitre = pn.lecons[pn.lecons.length - 1].titre;
+        prevId = pn.lecons[pn.lecons.length - 1].id;
+      }
+      root.appendChild(el("p", null, "Le déblocage est progressif. Termine d'abord : " + (prevTitre || "la leçon précédente") + "."));
+      if (prevId) {
+        const a = el("a", "btn", "Aller à : " + prevTitre);
+        a.href = "lecon.html?id=" + encodeURIComponent(prevId);
+        root.appendChild(a);
+      }
+      const c = el("a", "btn ghost", "Voir mes cours");
+      c.href = "cours.html";
+      root.appendChild(c);
     }
     return;
   }
 
+  // ----- CONTENU -----
   root.appendChild(el("span", "badge", niveau.code + " — " + niveau.nom));
   root.appendChild(el("h2", null, lecon.titre));
 
-  // Vocabulaire : base d'abord, JSON en repli
   let mots = [];
   try {
     const { data: rows } = await sb
@@ -124,6 +140,7 @@ function el(tag, cls, txt) {
       .eq("id", session.user.id);
     done.disabled = true;
     done.textContent = "Leçon terminée ✔";
+    window.location.href = "cours.html"; // retour pour voir la leçon suivante se débloquer
   });
   root.appendChild(done);
 
