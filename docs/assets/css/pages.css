@@ -74,3 +74,7 @@ body { min-height: 100vh; display: flex; flex-direction: column; }
 .badge-item { background: #fff; border-radius: 10px; padding: 10px 14px; box-shadow: 0 1px 4px rgba(0,0,0,.08); font-size: 1rem; text-align: center; }
 .badge-item small { display: block; color: #666; font-size: .75rem; }
 .badge-item.locked { opacity: .4; filter: grayscale(1); }
+/* ===== Quiz obligatoire ===== */
+.quiz button.ok-btn { border-color: #1e8e3e; color: #1e8e3e; }
+.quiz button.ko-btn { border-color: #c0392b; color: #c0392b; }
+.quiz button:disabled { opacity: .6; }
