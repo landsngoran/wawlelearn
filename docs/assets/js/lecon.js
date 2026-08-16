@@ -1,11 +1,19 @@
-// WawléLearn — Page Leçon v3 : verrou progressif + vocabulaire base + quiz
-
+// WawléLearn — Page Leçon v4 : verrous + quiz obligatoire + progression
 function el(tag, cls, txt) {
   const n = document.createElement(tag);
   if (cls) n.className = cls;
   if (txt !== undefined) n.textContent = txt;
   return n;
 }
+function melanger(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+function cleanF(s) { return String(s).replace(/\s*\(.*\)/, "").trim(); }
 
 (async () => {
   const root = document.getElementById("lecon");
@@ -88,8 +96,13 @@ function el(tag, cls, txt) {
   } catch (e) { /* repli JSON */ }
   if (!mots.length && lecon.mots && lecon.mots.length) mots = lecon.mots;
 
+  // ----- BOUTON TERMINER (créé tôt, état géré ensuite) -----
+  const done = el("button", "btn", "✅ Marquer comme terminée (+10 pts)");
+
   if (!mots.length) {
     root.appendChild(el("p", "mots", "[contenu à fournir — importe-le via la page Admin]"));
+    done.disabled = true;
+    done.textContent = "Contenu en préparation";
   } else {
     const ul = el("ul", "liste");
     mots.forEach((m) => {
@@ -100,30 +113,63 @@ function el(tag, cls, txt) {
     });
     root.appendChild(ul);
 
-    root.appendChild(el("h3", null, "✍️ Petit quiz"));
-    const quiz = el("div", "quiz");
-    const target = mots[Math.floor(Math.random() * mots.length)];
-    quiz.appendChild(el("p", null, "Comment dit-on « " + String(target.f).replace(/\s*\(.*\)/, "").trim() + " » en baoulé ?"));
-    const choices = [target.b];
-    while (choices.length < Math.min(4, mots.length)) {
-      const cand = mots[Math.floor(Math.random() * mots.length)].b;
-      if (!choices.includes(cand)) choices.push(cand);
-    }
-    choices.sort(() => Math.random() - 0.5);
-    const msg = el("p", "msg");
-    choices.forEach((c) => {
-      const btn = el("button", "btn ghost", c);
-      btn.addEventListener("click", () => {
-        if (c === target.b) { msg.textContent = "✅ Bravo !"; msg.classList.add("ok"); }
-        else { msg.textContent = "❌ Non, la réponse était « " + target.b + " »."; msg.classList.remove("ok"); }
+    // ----- QUIZ OBLIGATOIRE (3/5) -----
+    root.appendChild(el("h3", null, "✍️ Quiz obligatoire — 3 bonnes réponses pour valider"));
+    const quizZone = el("div");
+    const resultat = el("p", "msg");
+    const btnRetry = el("button", "btn ghost", "🔄 Réessayer");
+    btnRetry.hidden = true;
+    root.appendChild(quizZone);
+    root.appendChild(resultat);
+    root.appendChild(btnRetry);
+
+    const SEUIL = 3;
+    let score = 0, repondues = 0, totalQ = 0;
+
+    function construireQuiz() {
+      quizZone.textContent = "";
+      resultat.textContent = "";
+      resultat.classList.remove("ok");
+      btnRetry.hidden = true;
+      done.disabled = true;
+      done.textContent = "✅ Marquer comme terminée (+10 pts)";
+      score = 0; repondues = 0;
+      const qs = melanger(mots).slice(0, Math.min(5, mots.length));
+      totalQ = qs.length;
+      const seuilReel = Math.min(SEUIL, totalQ);
+
+      qs.forEach((cible, qi) => {
+        const q = el("div", "quiz");
+        q.appendChild(el("p", null, (qi + 1) + ". Comment dit-on « " + cleanF(cible.f) + " » en baoulé ?"));
+        const choices = [cible.b];
+        while (choices.length < Math.min(4, mots.length)) {
+          const cand = mots[Math.floor(Math.random() * mots.length)].b;
+          if (!choices.includes(cand)) choices.push(cand);
+        }
+        melanger(choices).forEach((c) => {
+          const b = el("button", "btn ghost", c);
+          b.addEventListener("click", () => {
+            q.querySelectorAll("button").forEach((x) => { x.disabled = true; });
+            if (c === cible.b) { score++; b.classList.add("ok-btn"); }
+            else { b.classList.add("ko-btn"); }
+            repondues++;
+            if (repondues === totalQ) {
+              const ok = score >= seuilReel;
+              resultat.textContent = "Score : " + score + "/" + totalQ + (ok ? " — ✅ Quiz réussi !" : " — il faut " + seuilReel + " bonne(s) réponse(s).");
+              resultat.classList.toggle("ok", ok);
+              if (ok) { done.disabled = false; }
+              else { btnRetry.hidden = false; }
+            }
+          });
+          q.appendChild(b);
+        });
+        quizZone.appendChild(q);
       });
-      quiz.appendChild(btn);
-    });
-    quiz.appendChild(msg);
-    root.appendChild(quiz);
+    }
+    btnRetry.addEventListener("click", construireQuiz);
+    construireQuiz();
   }
 
-  const done = el("button", "btn", "✅ Marquer comme terminée (+10 pts)");
   done.addEventListener("click", async () => {
     if (!session) { window.location.href = "connexion.html"; return; }
     const { error } = await sb
@@ -140,7 +186,7 @@ function el(tag, cls, txt) {
       .eq("id", session.user.id);
     done.disabled = true;
     done.textContent = "Leçon terminée ✔";
-    window.location.href = "cours.html"; // retour pour voir la leçon suivante se débloquer
+    window.location.href = "cours.html";
   });
   root.appendChild(done);
 
