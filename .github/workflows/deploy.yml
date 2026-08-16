@@ -1,6 +1,4 @@
-env:
-  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
-  name: Deploy WawleLearn to GitHub Pages
+name: Deploy WawleLearn to GitHub Pages
 
 on:
   push:
@@ -24,10 +22,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5          # runtime Node 24 natif
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5        # runtime Node 24 natif
+        uses: actions/setup-node@v5
         with:
           node-version: 22
 
